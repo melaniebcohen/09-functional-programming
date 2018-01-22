@@ -1,5 +1,10 @@
 'use strict';
+
 var app = app || {};
+
+(function(module) {
+
+  var Article = {};  
 
 function Article(rawDataObj) {
   // REVIEW: In Lab 8, we explored a lot of new functionality going on here. Let's re-examine the concept of context. Normally, "this" inside of a constructor function refers to the newly instantiated object. However, in the function we're passing to forEach, "this" would normally refer to "undefined" in strict mode. As a result, we had to pass a second argument to forEach to make sure our "this" was still referring to our instantiated object. One of the primary purposes of lexical arrow functions, besides cleaning up syntax to use fewer lines of code, is to also preserve context. That means that when you declare a function using lexical arrows, "this" inside the function will still be the same "this" as it was outside the function. As a result, we no longer have to pass in the optional "this" argument to forEach!
@@ -31,7 +36,7 @@ Article.fetchAll = callback => {
   $.get('/articles')
     .then(results => {
       Article.loadAll(results);
-      callback();
+      // callback();
     })
 };
 
@@ -60,11 +65,9 @@ Article.allAuthors = () => {
   }, []);
 }
 
-
 Article.numWordsByAuthor = () => {
 // receives results from allAuthors function (5 authors)
 // map returns object literal with two properties - author's name, number of words from author (which will require more than just map)
-// ['melanie','brian','lee']
   // var allAuthors = Article.allAuthors().map(author => {
   //   var authorObj = {};
   //   authorObj.name = author;
@@ -72,7 +75,6 @@ Article.numWordsByAuthor = () => {
   // })
 
   // console.log(allAuthors);
-
 
   var authorStats = Article.allAuthors().map(author => {
     console.log(author)
@@ -83,30 +85,7 @@ Article.numWordsByAuthor = () => {
         console.log(words)
       }
     })
-    
-  //   reduce((prev, cur) => {
-  //     return prev + cur;
-  // })
 })
-console.log(authorStats)
-// return authorStats
-  // words.reduce((prev, cur) => {
-  //   return prev + cur;
-
-  // .reduce((prev,cur) => {
-  //       console.log(prev + cur);
-  //       return prev + cur;
-  //     })
-  // return authorStats
-
-    // return Article.all.map(article => { 
-    //   return article.body.split(' ').length;
-    // }).reduce((prev,cur) => {
-    //   return prev + cur;
-  
-  //   // for all articles
-  //   // if author name 
-  // })
 }
 
 Article.truncateTable = callback => {
@@ -152,3 +131,8 @@ Article.prototype.updateRecord = function(callback) {
     .then(console.log)
     .then(callback);
 };
+
+module.Article = Article;
+// module.Article.all = Article.all;
+
+})(window);
