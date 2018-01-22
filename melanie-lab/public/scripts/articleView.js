@@ -1,6 +1,8 @@
 'use strict';
 var app = app || {};
 
+(function(module) {
+
 var articleView = {};
 
 articleView.populateFilters = () => {
@@ -119,8 +121,7 @@ articleView.submit = event => {
 }
 
 articleView.initIndexPage = () => {
-  // changed app.Article.all to Article.all
-  Article.all.forEach(a => $('#articles').append(a.toHtml()));
+  app.Article.all.forEach(a => $('#articles').append(a.toHtml()));
 
   articleView.populateFilters();
   articleView.handleCategoryFilter();
@@ -141,3 +142,7 @@ articleView.initAdminPage = () => {
   $('#blog-stats .articles').text(Article.all.length);
   $('#blog-stats .words').text(Article.numWordsAll());
 };
+
+module.articleView = articleView;
+
+})(window);
