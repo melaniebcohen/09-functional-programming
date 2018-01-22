@@ -65,24 +65,14 @@ var app = app || {};
   Article.numWordsByAuthor = () => {
   // receives results from allAuthors function (5 authors)
   // map returns object literal with two properties - author's name, number of words from author (which will require more than just map)
-    // var allAuthors = Article.allAuthors().map(author => {
-    //   var authorObj = {};
-    //   authorObj.name = author;
-    //   return authorObj;
-    // })
+/*Transform each author string into an object with properties for the author's name, as well as the total number of words across all articles written by the specified author.
+HINT: This .map() call should be set up to return an object literal with two properties. The first property should be pretty straightforward, but you will need to chain some combination of .filter(), .map(), and .reduce() to get the value for the second property.
+*/
+    return Article.allAuthors().map((author) => {
+      // filter all articles by author
+      // map each body content 
 
-    // console.log(allAuthors);
-
-    var authorStats = Article.allAuthors().map(author => {
-      console.log(author)
-      Article.all.filter(article => {
-        // if the authors match, return all article lengths fo
-        if (author === article.author) {
-          var words = article.body.split(' ').length;
-          console.log(words)
-        }
-      })
-  })
+    })
   }
 
   Article.truncateTable = callback => {
