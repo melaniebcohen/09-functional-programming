@@ -36,6 +36,11 @@
         <h2>Author Stats</h2>
         <p><em>Details on who is writing, and how much writing they are doing...</em></p>
         <ul class="author-stats">
+          <script id="hb-template" type="text/x-handlebars-template">
+            <li>{{stat}}</li>
+            <li>{{stat}}</li>
+            <!-- <li>{{}}</li> -->
+          </script>
         </ul>
       </section>
     </main>
@@ -47,8 +52,9 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/handlebars.js/4.0.11/handlebars.min.js"></script>
     <script src="/scripts/article.js"></script>
     <script src="/scripts/articleView.js"></script>
+    <script src="/server.js"></script>
     <script>
-      Article.fetchAll();
+      Article.fetchAll(articleView.initAdminPage);
     </script>
   </body>
 </html>
