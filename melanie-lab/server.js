@@ -5,9 +5,11 @@ const pg = require('pg');
 const fs = require('fs');
 const express = require('express');
 const bodyParser = require('body-parser');
+
 const PORT = process.env.PORT || 3000;
 const app = express();
-const conString = '';
+
+const conString = 'postgres://localhost:5432/kilovolt';
 const client = new pg.Client(conString);
 client.connect();
 client.on('error', err => {
@@ -118,7 +120,6 @@ loadDB();
 
 app.listen(PORT, () => console.log(`Server started on port ${PORT}!`));
 
-
 //////// ** DATABASE LOADERS ** ////////
 ////////////////////////////////////////
 function loadAuthors() {
@@ -156,6 +157,7 @@ function loadArticles() {
 }
 
 function loadDB() {
+  console.log('loadDB fired');
   client.query(`
     CREATE TABLE IF NOT EXISTS
     authors (
