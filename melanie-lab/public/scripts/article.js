@@ -20,11 +20,11 @@ Article.prototype.toHtml = function() {
 
 Article.loadAll = rawData => {
   rawData.sort((a,b) => (new Date(b.publishedOn)) - (new Date(a.publishedOn)))
-
-  /* OLD forEach():
-  rawData.forEach(articleObject => Article.all.push(new Article(articleObject)));
-  */
-
+  
+  rawData.map(article => {
+    Article.all.push(new Article(article))
+  })
+  console.log('Articles instantiated:',Article.all)
 };
 
 Article.fetchAll = callback => {
