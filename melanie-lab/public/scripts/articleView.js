@@ -119,7 +119,8 @@ articleView.submit = event => {
 }
 
 articleView.initIndexPage = () => {
-  app.Article.all.forEach(a => $('#articles').append(a.toHtml()));
+  // changed app.Article.all to Article.all
+  Article.all.forEach(a => $('#articles').append(a.toHtml()));
 
   articleView.populateFilters();
   articleView.handleCategoryFilter();
