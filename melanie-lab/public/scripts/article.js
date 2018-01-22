@@ -21,9 +21,9 @@ Article.prototype.toHtml = function() {
 Article.loadAll = rawData => {
   rawData.sort((a,b) => (new Date(b.publishedOn)) - (new Date(a.publishedOn)))
   
-  rawData.map(article => {
-    Article.all.push(new Article(article))
-  })
+  var newArr = rawData.map(article => { return (new Article(article)) })
+
+  Article.all = newArr;
   console.log('Articles instantiated:',Article.all)
 };
 
@@ -36,16 +36,78 @@ Article.fetchAll = callback => {
 };
 
 Article.numWordsAll = () => {
-  return Article.all.map().reduce()
+  // get a rough count of all words in all articles
+  // map -> get all words in each article
+  // reduce -> sum all those totals together
+  return Article.all.map(article => { 
+    return article.body.split(' ').length;
+  }).reduce((prev,cur) => {
+    return prev + cur;
+  });
 };
 
 Article.allAuthors = () => {
-  return Article.all.map().reduce();
-};
+  // produce an array of unique author names. You will probably need to use the optional accumulator argument in your reduce call
+  // map -> get all authors in array
+  return Article.all.map(article => {
+    return article.author;
+  }).reduce((acc,cur) => {
+    // acc is accumulator, cur is current
+    if (acc.indexOf(cur) === -1) {
+      acc.push(cur);
+    }
+    return acc;
+  }, []);
+}
+
 
 Article.numWordsByAuthor = () => {
-  return Article.allAuthors().map(author => {})
-};
+// receives results from allAuthors function (5 authors)
+// map returns object literal with two properties - author's name, number of words from author (which will require more than just map)
+// ['melanie','brian','lee']
+  // var allAuthors = Article.allAuthors().map(author => {
+  //   var authorObj = {};
+  //   authorObj.name = author;
+  //   return authorObj;
+  // })
+
+  // console.log(allAuthors);
+
+
+  var authorStats = Article.allAuthors().map(author => {
+    console.log(author)
+    Article.all.filter(article => {
+      // if the authors match, return all article lengths fo
+      if (author === article.author) {
+        var words = article.body.split(' ').length;
+        console.log(words)
+      }
+    })
+    
+  //   reduce((prev, cur) => {
+  //     return prev + cur;
+  // })
+})
+console.log(authorStats)
+// return authorStats
+  // words.reduce((prev, cur) => {
+  //   return prev + cur;
+
+  // .reduce((prev,cur) => {
+  //       console.log(prev + cur);
+  //       return prev + cur;
+  //     })
+  // return authorStats
+
+    // return Article.all.map(article => { 
+    //   return article.body.split(' ').length;
+    // }).reduce((prev,cur) => {
+    //   return prev + cur;
+  
+  //   // for all articles
+  //   // if author name 
+  // })
+}
 
 Article.truncateTable = callback => {
   $.ajax({

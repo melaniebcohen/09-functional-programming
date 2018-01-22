@@ -137,6 +137,7 @@ articleView.initAdminPage = () => {
   app.Article.numWordsByAuthor().forEach(stat => $('.author-stats').append(template(stat)));
 
   // REVIEW: Simply write the correct values to the page:
-  $('#blog-stats .articles').text(app.Article.all.length);
-  $('#blog-stats .words').text(app.Article.numWordsAll());
+  // removed app from app.Article.all
+  $('#blog-stats .articles').text(Article.all.length);
+  $('#blog-stats .words').text(Article.numWordsAll());
 };
